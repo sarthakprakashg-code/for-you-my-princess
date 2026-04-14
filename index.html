@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For You 💖</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+    font-family:'Poppins',sans-serif;
+    overflow:hidden;
+    background:url('bg.jpg') no-repeat center center/cover;
+    color:white;
+}
+
+/* Overlay */
+.overlay{
+    position:absolute;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.6);
+}
+
+/* 🌟 Stars */
+.star{
+    position:absolute;
+    width:2px;
+    height:2px;
+    background:white;
+    border-radius:50%;
+    animation:blink 2s infinite alternate;
+}
+@keyframes blink{
+    from{opacity:0.2;}
+    to{opacity:1;}
+}
+
+/* 💖 Hearts */
+.heart{
+    position:absolute;
+    color:pink;
+    font-size:14px;
+    animation:floatUp 6s linear infinite;
+}
+@keyframes floatUp{
+    from{transform:translateY(100vh);opacity:1;}
+    to{transform:translateY(-10vh);opacity:0;}
+}
+
+/* Center */
+.center{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    text-align:center;
+    width:85%;
+}
+
+/* Pages */
+.page{display:none;}
+.active{display:block;animation:fadeIn 1s ease;}
+
+@keyframes fadeIn{
+    from{opacity:0;}
+    to{opacity:1;}
+}
+
+/* Buttons */
+button{
+    padding:10px 20px;
+    border:none;
+    border-radius:20px;
+    background:pink;
+    cursor:pointer;
+    margin-top:20px;
+}
+
+/* Typing */
+.typing{
+    font-size:28px;
+    min-height:70px;
+    text-shadow:0 0 10px pink;
+}
+
+/* Floating text */
+.float{
+    animation:float 3s ease-in-out infinite;
+}
+@keyframes float{
+    0%{transform:translateY(0);}
+    50%{transform:translateY(-20px);}
+    100%{transform:translateY(0);}
+}
+
+/* Final Image */
+.final-img{
+    width:220px;
+    border-radius:20px;
+    margin-top:20px;
+    box-shadow:0 0 20px pink;
+    animation:zoomIn 2s ease;
+}
+@keyframes zoomIn{
+    from{transform:scale(0);}
+    to{transform:scale(1);}
+}
+</style>
+</head>
+
+<body>
+
+<div class="overlay"></div>
+
+<audio id="music" loop>
+    <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<!-- 🎬 INTRO -->
+<div class="center page active" id="intro">
+    <h2 class="float">Hey… I made something for you 💖</h2>
+    <button onclick="start()">Tap to Begin ✨</button>
+</div>
+
+<!-- 🔐 LOCK -->
+<div class="center page" id="lock">
+    <h2>Enter Password 💕</h2>
+    <input type="password" id="password" placeholder="hint 😉">
+    <br>
+    <button onclick="check()">Unlock 💫</button>
+</div>
+
+<!-- 💌 PAGE 1 -->
+<div class="center page" id="p1">
+    <div class="typing float" id="t1"></div>
+    <button onclick="next(2)">Next ➡️</button>
+</div>
+
+<!-- 💌 PAGE 2 -->
+<div class="center page" id="p2">
+    <div class="typing float" id="t2"></div>
+    <button onclick="next(3)">Next ➡️</button>
+</div>
+
+<!-- 💌 PAGE 3 -->
+<div class="center page" id="p3">
+    <div class="typing float" id="t3"></div>
+    <button onclick="next(4)">Next ➡️</button>
+</div>
+
+<!-- 💖 FINAL -->
+<div class="center page" id="p4">
+    <div class="typing float" id="t4"></div>
+    <img src="bg.jpg" class="final-img">
+</div>
+
+<script>
+// Stars
+for(let i=0;i<120;i++){
+    let s=document.createElement("div");
+    s.className="star";
+    s.style.top=Math.random()*window.innerHeight+"px";
+    s.style.left=Math.random()*window.innerWidth+"px";
+    s.style.animationDuration=(Math.random()*2+1)+"s";
+    document.body.appendChild(s);
+}
+
+// Hearts
+setInterval(()=>{
+    let h=document.createElement("div");
+    h.className="heart";
+    h.innerHTML="💖";
+    h.style.left=Math.random()*100+"%";
+    document.body.appendChild(h);
+
+    setTimeout(()=>h.remove(),6000);
+},400);
+
+// Start
+function start(){
+    show("lock");
+    document.getElementById("music").play();
+}
+
+// Password
+function check(){
+    let p=document.getElementById("password").value;
+    if(p.toLowerCase()=="love"){ // CHANGE THIS
+        show("p1");
+        type("t1","I don’t even know where to begin… but I just know this — I love you 💖");
+    }else{
+        alert("Wrong password 😝");
+    }
+}
+
+// Page switch
+function show(id){
+    document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+    document.getElementById(id).classList.add("active");
+}
+
+function next(n){
+    show("p"+n);
+
+    if(n==2) type("t2","Every moment with you feels like magic ✨🥺");
+    if(n==3) type("t3","You’re not just special… you’re my everything 💞");
+    if(n==4) type("t4","I’m all yours, forever ❤️");
+}
+
+// Typing
+function type(id,text){
+    let i=0;
+    let el=document.getElementById(id);
+    el.innerHTML="";
+
+    function t(){
+        if(i<text.length){
+            el.innerHTML+=text.charAt(i);
+            i++;
+            setTimeout(t,40);
+        }
+    }
+    t();
+}
+</script>
+
+</body>
+</html>
