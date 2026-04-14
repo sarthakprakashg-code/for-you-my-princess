@@ -62,12 +62,14 @@ body{
 }
 
 /* Pages */
-.page{display:none;}
-.active{display:block;animation:fadeIn 1s ease;}
-
-@keyframes fadeIn{
-    from{opacity:0;}
-    to{opacity:1;}
+.page{
+    opacity:0;
+    pointer-events:none;
+    transition:0.6s;
+}
+.active{
+    opacity:1;
+    pointer-events:auto;
 }
 
 /* Buttons */
@@ -78,13 +80,23 @@ button{
     background:pink;
     cursor:pointer;
     margin-top:20px;
+    font-weight:bold;
+}
+
+/* Input */
+input{
+    padding:10px;
+    border-radius:20px;
+    border:none;
+    margin-top:10px;
+    text-align:center;
 }
 
 /* Typing */
 .typing{
     font-size:28px;
     min-height:70px;
-    text-shadow:0 0 10px pink;
+    text-shadow:0 0 10px pink, 0 0 20px hotpink, 0 0 40px deeppink;
 }
 
 /* Floating text */
@@ -159,7 +171,7 @@ button{
 </div>
 
 <script>
-// Stars
+// 🌟 Stars
 for(let i=0;i<120;i++){
     let s=document.createElement("div");
     s.className="star";
@@ -169,35 +181,49 @@ for(let i=0;i<120;i++){
     document.body.appendChild(s);
 }
 
-// Hearts
+// 💖 Floating hearts
 setInterval(()=>{
     let h=document.createElement("div");
     h.className="heart";
     h.innerHTML="💖";
     h.style.left=Math.random()*100+"%";
     document.body.appendChild(h);
-
     setTimeout(()=>h.remove(),6000);
 },400);
 
-// Start
+// 💥 Click hearts burst
+document.addEventListener("click", e=>{
+    for(let i=0;i<6;i++){
+        let h=document.createElement("div");
+        h.className="heart";
+        h.innerHTML="💖";
+        h.style.left=e.clientX+"px";
+        h.style.top=e.clientY+"px";
+        document.body.appendChild(h);
+        setTimeout(()=>h.remove(),2000);
+    }
+});
+
+// 🎧 Start
 function start(){
     show("lock");
-    document.getElementById("music").play();
+    let music=document.getElementById("music");
+    music.volume=0.7;
+    music.play().catch(()=>{});
 }
 
-// Password
+// 🔒 Password
 function check(){
     let p=document.getElementById("password").value;
-    if(p.toLowerCase()=="Sadiya"){ // CHANGE THIS
+    if(p.toLowerCase()=="sadiya"){
         show("p1");
-        type("t1","I don’t even know where to begin… but I just know this — I love you 💖");
+        type("t1","Meri jaaaaannnnn 🥺💖 I looooovvvveeeee youuuuuuuuu 💞");
     }else{
         alert("Wrong password 😝");
     }
 }
 
-// Page switch
+// 🔄 Page switch
 function show(id){
     document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
     document.getElementById(id).classList.add("active");
@@ -206,12 +232,31 @@ function show(id){
 function next(n){
     show("p"+n);
 
-    if(n==2) type("t2","Every moment with you feels like magic ✨🥺");
-    if(n==3) type("t3","You’re not just special… you’re my everything 💞");
-    if(n==4) type("t4","I’m all yours, forever ❤️");
+    if(n==2) type("t2",`I love you 💖
+I love you 🥺💕
+I love you so much 😭❤️
+I love you more than everything 🌍💗
+I love you forever 💍❤️
+
+I love you 💖 I love you 💖 I love you 💖
+I love you 🥰 I love you 🥰 I love you 🥰
+
+I love you more every single day 🌸❤️
+I love you infinity ♾️💘`);
+
+    if(n==3) type("t3",`My Baby 🥺💖 Babe 💕 Sweetheart 💓
+My Love 💘 Princess 👑 Angel 😇
+
+My World 🌍💖 My Everything 💞
+My Heart ❤️ Soulmate 💫
+
+Jaan ❤️ Jaanu 💕 Shona 🥺💗 Babu 💞`);
+
+    if(n==4) type("t4",`I’m all yours… forever 💖
+Forever… and always ❤️`);
 }
 
-// Typing
+// ⌨ Typing effect
 function type(id,text){
     let i=0;
     let el=document.getElementById(id);
