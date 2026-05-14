@@ -3,321 +3,1007 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For You 💖</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+<title>Happy Birthday Pallu ✨</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;}
+
+:root{
+--bg:#070812;
+--card:rgba(255,255,255,0.06);
+--text:#f5f5f5;
+--pink:#ffb6de;
+--soft:#ffffffb8;
+--border:rgba(255,255,255,0.08);
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+scroll-behavior:smooth;
+}
 
 body{
-    font-family:'Poppins',sans-serif;
-    overflow:hidden;
-    background:url('bg.jpg') no-repeat center center/cover;
-    color:white;
+background:var(--bg);
+font-family:'Poppins',sans-serif;
+overflow-x:hidden;
+color:var(--text);
 }
 
-/* Overlay */
-.overlay{
-    position:absolute;
-    width:100%;
-    height:100%;
-    background:rgba(0,0,0,0.6);
+/* ========================= */
+/* Background */
+/* ========================= */
+
+.bg{
+position:fixed;
+width:100%;
+height:100%;
+top:0;
+left:0;
+overflow:hidden;
+z-index:-5;
+background:
+radial-gradient(circle at top left,#ff4fc41f,transparent 30%),
+radial-gradient(circle at bottom right,#7c6dff25,transparent 30%),
+linear-gradient(to bottom,#070812,#0d1020);
 }
 
-/* 🌟 Stars */
+.blur{
+position:absolute;
+border-radius:50%;
+filter:blur(120px);
+opacity:.25;
+animation:move 12s infinite alternate ease-in-out;
+}
+
+.blur1{
+width:350px;
+height:350px;
+background:#ff5fd0;
+top:-80px;
+left:-50px;
+}
+
+.blur2{
+width:400px;
+height:400px;
+background:#6b5cff;
+right:-100px;
+bottom:-120px;
+}
+
+@keyframes move{
+from{
+transform:translate(0,0);
+}
+to{
+transform:translate(80px,-40px);
+}
+}
+
+/* ========================= */
+/* Stars */
+/* ========================= */
+
+.stars{
+position:fixed;
+width:100%;
+height:100%;
+top:0;
+left:0;
+z-index:-4;
+}
+
 .star{
-    position:absolute;
-    width:2px;
-    height:2px;
-    background:white;
-    border-radius:50%;
-    animation:blink 2s infinite alternate;
-}
-@keyframes blink{
-    from{opacity:0.2;}
-    to{opacity:1;}
+position:absolute;
+width:2px;
+height:2px;
+background:white;
+border-radius:50%;
+opacity:.5;
+animation:twinkle 3s infinite alternate;
 }
 
-/* 💖 Hearts */
-.heart{
-    position:absolute;
-    color:pink;
-    font-size:14px;
-    animation:floatUp 6s linear infinite;
+@keyframes twinkle{
+from{
+opacity:.2;
+transform:scale(.7);
 }
-@keyframes floatUp{
-    from{transform:translateY(100vh);opacity:1;}
-    to{transform:translateY(-10vh);opacity:0;}
+to{
+opacity:1;
+transform:scale(1.7);
 }
-
-/* Center */
-.center{
-    position:absolute;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%);
-    text-align:center;
-    width:85%;
 }
 
-/* Pages */
-.page{
-    opacity:0;
-    pointer-events:none;
-    transition:0.6s;
-}
-.active{
-    opacity:1;
-    pointer-events:auto;
+/* ========================= */
+/* Floating Hearts */
+/* ========================= */
+
+.floating-hearts{
+position:fixed;
+width:100%;
+height:100%;
+top:0;
+left:0;
+pointer-events:none;
+overflow:hidden;
+z-index:-2;
 }
 
-/* Buttons */
-button{
-    padding:10px 20px;
-    border:none;
-    border-radius:20px;
-    background:pink;
-    cursor:pointer;
-    margin-top:20px;
-    font-weight:bold;
+.floating-hearts span{
+position:absolute;
+bottom:-100px;
+font-size:22px;
+opacity:.7;
+animation:heartMove linear infinite;
 }
 
-/* Input */
-input{
-    padding:10px;
-    border-radius:20px;
-    border:none;
-    margin-top:10px;
-    text-align:center;
+.floating-hearts span:nth-child(1){left:10%;animation-duration:10s;}
+.floating-hearts span:nth-child(2){left:25%;animation-duration:12s;}
+.floating-hearts span:nth-child(3){left:40%;animation-duration:8s;}
+.floating-hearts span:nth-child(4){left:55%;animation-duration:14s;}
+.floating-hearts span:nth-child(5){left:70%;animation-duration:9s;}
+.floating-hearts span:nth-child(6){left:85%;animation-duration:11s;}
+
+@keyframes heartMove{
+0%{
+transform:translateY(0) rotate(0deg);
+opacity:0;
+}
+10%{
+opacity:1;
+}
+100%{
+transform:translateY(-120vh) rotate(360deg);
+opacity:0;
+}
 }
 
-/* Typing */
-.typing{
-    font-size:28px;
-    min-height:70px;
-    text-shadow:0 0 10px pink, 0 0 20px hotpink, 0 0 40px deeppink;
+/* ========================= */
+/* Cursor Glow */
+/* ========================= */
+
+.cursor-glow{
+position:fixed;
+width:250px;
+height:250px;
+border-radius:50%;
+background:radial-gradient(circle,rgba(255,255,255,.08),transparent 70%);
+pointer-events:none;
+transform:translate(-50%,-50%);
+z-index:-1;
+transition:.08s linear;
 }
 
-/* Floating text */
-.float{
-    animation:float 3s ease-in-out infinite;
-}
-@keyframes float{
-    0%{transform:translateY(0);}
-    50%{transform:translateY(-20px);}
-    100%{transform:translateY(0);}
+/* ========================= */
+/* Navbar */
+/* ========================= */
+
+nav{
+position:fixed;
+top:0;
+width:100%;
+padding:22px 8%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+z-index:999;
+backdrop-filter:blur(12px);
+background:rgba(0,0,0,.15);
+border-bottom:1px solid rgba(255,255,255,.05);
 }
 
-/* Final Image */
-.final-img{
-    width:220px;
-    border-radius:20px;
-    margin-top:20px;
-    box-shadow:0 0 20px pink;
-    animation:zoomIn 2s ease;
+.logo{
+font-family:'Cormorant Garamond',serif;
+font-size:2rem;
+font-weight:700;
+color:var(--pink);
 }
-@keyframes zoomIn{
-    from{transform:scale(0);}
-    to{transform:scale(1);}
+
+nav ul{
+display:flex;
+gap:35px;
+list-style:none;
 }
+
+nav a{
+text-decoration:none;
+color:white;
+font-size:.95rem;
+transition:.3s;
+}
+
+nav a:hover{
+color:var(--pink);
+}
+
+/* ========================= */
+/* Hero */
+/* ========================= */
+
+.hero{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+padding:0 8%;
+position:relative;
+text-align:center;
+}
+
+.hero-content{
+max-width:900px;
+animation:heroFloat 5s ease-in-out infinite;
+}
+
+@keyframes heroFloat{
+0%,100%{
+transform:translateY(0);
+}
+50%{
+transform:translateY(-12px);
+}
+}
+
+.tag{
+display:inline-block;
+padding:10px 22px;
+border-radius:50px;
+background:rgba(255,255,255,.05);
+border:1px solid rgba(255,255,255,.1);
+backdrop-filter:blur(10px);
+margin-bottom:30px;
+font-size:.9rem;
+color:var(--soft);
+}
+
+.hero h1{
+font-size:6rem;
+line-height:1.1;
+font-family:'Cormorant Garamond',serif;
+font-weight:700;
+margin-bottom:25px;
+position:relative;
+overflow:hidden;
+}
+
+.hero h1 span{
+color:var(--pink);
+}
+
+.hero h1::after{
+content:'';
+position:absolute;
+top:0;
+left:-120%;
+width:60%;
+height:100%;
+background:linear-gradient(
+90deg,
+transparent,
+rgba(255,255,255,0.7),
+transparent
+);
+transform:skewX(-20deg);
+animation:shine 5s infinite;
+}
+
+@keyframes shine{
+0%{
+left:-120%;
+}
+100%{
+left:150%;
+}
+}
+
+.hero p{
+font-size:1.15rem;
+line-height:2;
+color:var(--soft);
+max-width:760px;
+margin:auto;
+}
+
+.hero-btns{
+margin-top:40px;
+display:flex;
+justify-content:center;
+gap:20px;
+flex-wrap:wrap;
+}
+
+.btn{
+padding:15px 30px;
+border-radius:50px;
+text-decoration:none;
+font-size:.95rem;
+transition:.4s;
+}
+
+.primary{
+background:linear-gradient(135deg,#ff8dd9,#ff4fc4);
+color:white;
+box-shadow:0 0 30px rgba(255,79,196,.5);
+animation:pulseGlow 2.5s infinite;
+}
+
+@keyframes pulseGlow{
+0%{
+box-shadow:0 0 0 rgba(255,79,196,.4);
+}
+50%{
+box-shadow:0 0 35px rgba(255,79,196,.6);
+}
+100%{
+box-shadow:0 0 0 rgba(255,79,196,.4);
+}
+}
+
+.primary:hover{
+transform:translateY(-4px);
+}
+
+.secondary{
+border:1px solid rgba(255,255,255,.15);
+color:white;
+background:rgba(255,255,255,.04);
+backdrop-filter:blur(10px);
+}
+
+.secondary:hover{
+background:rgba(255,255,255,.08);
+}
+
+/* ========================= */
+/* Sections */
+/* ========================= */
+
+section{
+padding:120px 8%;
+}
+
+.section-title{
+text-align:center;
+margin-bottom:80px;
+}
+
+.section-title h2{
+font-size:4rem;
+font-family:'Cormorant Garamond',serif;
+margin-bottom:15px;
+}
+
+.section-title p{
+color:var(--soft);
+}
+
+/* ========================= */
+/* Fade Animation */
+/* ========================= */
+
+.fade-up{
+opacity:0;
+transform:translateY(50px);
+transition:1s ease;
+}
+
+.fade-up.show{
+opacity:1;
+transform:translateY(0);
+}
+
+/* ========================= */
+/* Gallery */
+/* ========================= */
+
+.gallery{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:30px;
+}
+
+.card{
+position:relative;
+overflow:hidden;
+border-radius:28px;
+background:var(--card);
+border:1px solid var(--border);
+height:420px;
+cursor:pointer;
+transition:.5s;
+backdrop-filter:blur(14px);
+animation:cardFloat 6s ease-in-out infinite;
+}
+
+.card:nth-child(2){animation-delay:1s;}
+.card:nth-child(3){animation-delay:2s;}
+.card:nth-child(4){animation-delay:3s;}
+.card:nth-child(5){animation-delay:1.5s;}
+.card:nth-child(6){animation-delay:2.5s;}
+
+@keyframes cardFloat{
+0%,100%{
+transform:translateY(0);
+}
+50%{
+transform:translateY(-10px);
+}
+}
+
+.card:hover{
+transform:translateY(-15px) scale(1.03);
+}
+
+.card img{
+width:100%;
+height:100%;
+object-fit:cover;
+transition:1s;
+}
+
+.card:hover img{
+transform:scale(1.08);
+}
+
+.card::before{
+content:'';
+position:absolute;
+inset:0;
+background:linear-gradient(
+135deg,
+rgba(255,255,255,.15),
+transparent,
+rgba(255,255,255,.05)
+);
+opacity:0;
+transition:.5s;
+z-index:2;
+}
+
+.card:hover::before{
+opacity:1;
+}
+
+.overlay{
+position:absolute;
+bottom:0;
+left:0;
+width:100%;
+padding:30px;
+background:linear-gradient(to top,rgba(0,0,0,.8),transparent);
+z-index:3;
+}
+
+.overlay h3{
+margin-bottom:8px;
+font-size:1.1rem;
+}
+
+.overlay p{
+font-size:.9rem;
+color:#ddd;
+}
+
+/* ========================= */
+/* Timeline */
+/* ========================= */
+
+.timeline{
+position:relative;
+max-width:1000px;
+margin:auto;
+}
+
+.timeline::before{
+content:'';
+position:absolute;
+left:50%;
+top:0;
+width:2px;
+height:100%;
+background:rgba(255,255,255,.1);
+transform:translateX(-50%);
+}
+
+.moment{
+width:45%;
+padding:30px;
+margin-bottom:50px;
+background:var(--card);
+border:1px solid var(--border);
+border-radius:25px;
+backdrop-filter:blur(12px);
+position:relative;
+transition:.4s;
+animation:momentFloat 5s ease-in-out infinite;
+}
+
+.moment:nth-child(2){animation-delay:1s;}
+.moment:nth-child(3){animation-delay:2s;}
+.moment:nth-child(4){animation-delay:3s;}
+
+@keyframes momentFloat{
+0%,100%{
+transform:translateY(0);
+}
+50%{
+transform:translateY(-8px);
+}
+}
+
+.moment:nth-child(odd){
+left:0;
+}
+
+.moment:nth-child(even){
+left:55%;
+}
+
+.moment h3{
+margin-bottom:12px;
+color:var(--pink);
+}
+
+/* ========================= */
+/* Letter */
+/* ========================= */
+
+.letter{
+display:flex;
+justify-content:center;
+}
+
+.letter-box{
+max-width:1000px;
+padding:70px;
+border-radius:35px;
+background:var(--card);
+border:1px solid var(--border);
+backdrop-filter:blur(20px);
+position:relative;
+overflow:hidden;
+}
+
+.letter-box::before{
+content:'';
+position:absolute;
+width:300px;
+height:300px;
+background:#ff4fc433;
+border-radius:50%;
+filter:blur(100px);
+top:-100px;
+right:-100px;
+}
+
+.letter-box::after{
+content:'';
+position:absolute;
+inset:-2px;
+border-radius:35px;
+padding:2px;
+background:linear-gradient(
+45deg,
+#ff4fc4,
+#ffffff,
+#8a7dff,
+#ff4fc4
+);
+-webkit-mask:
+linear-gradient(#fff 0 0) content-box,
+linear-gradient(#fff 0 0);
+-webkit-mask-composite:xor;
+mask-composite:exclude;
+animation:rotateBorder 6s linear infinite;
+}
+
+@keyframes rotateBorder{
+0%{
+filter:hue-rotate(0deg);
+}
+100%{
+filter:hue-rotate(360deg);
+}
+}
+
+.letter-box h2{
+font-size:4rem;
+font-family:'Cormorant Garamond',serif;
+margin-bottom:30px;
+color:var(--pink);
+position:relative;
+z-index:2;
+}
+
+.letter-box p{
+font-size:1.08rem;
+line-height:2.2;
+color:#f0f0f0;
+position:relative;
+z-index:2;
+}
+
+/* ========================= */
+/* Final */
+/* ========================= */
+
+.final{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+text-align:center;
+padding:20px;
+}
+
+.final h1{
+font-size:6rem;
+font-family:'Cormorant Garamond',serif;
+margin-bottom:20px;
+animation:loveBeat 2s infinite;
+}
+
+@keyframes loveBeat{
+0%,100%{
+transform:scale(1);
+}
+50%{
+transform:scale(1.08);
+}
+}
+
+.final p{
+font-size:1.1rem;
+color:var(--soft);
+max-width:700px;
+line-height:2;
+}
+
+/* ========================= */
+/* Footer */
+/* ========================= */
+
+footer{
+padding:30px;
+text-align:center;
+font-size:.9rem;
+color:#999;
+border-top:1px solid rgba(255,255,255,.05);
+}
+
+/* ========================= */
+/* Responsive */
+/* ========================= */
+
+@media(max-width:900px){
+
+.hero h1{
+font-size:4rem;
+}
+
+.section-title h2,
+.letter-box h2,
+.final h1{
+font-size:3rem;
+}
+
+.timeline::before{
+left:20px;
+}
+
+.moment{
+width:100%;
+left:0 !important;
+padding-left:50px;
+}
+
+nav ul{
+display:none;
+}
+
+.letter-box{
+padding:40px 25px;
+}
+
+}
+
 </style>
 </head>
 
 <body>
 
-<div class="overlay"></div>
+<!-- Background -->
+<div class="bg">
+<div class="blur blur1"></div>
+<div class="blur blur2"></div>
+</div>
 
-<audio id="music" loop>
-    <source src="music.mp3.mp3" type="audio/mpeg">
+<!-- Stars -->
+<div class="stars" id="stars"></div>
+
+<!-- Floating Hearts -->
+<div class="floating-hearts">
+<span>💖</span>
+<span>✨</span>
+<span>🌸</span>
+<span>💕</span>
+<span>🎀</span>
+<span>💗</span>
+</div>
+
+<!-- Cursor Glow -->
+<div class="cursor-glow"></div>
+
+<!-- Navbar -->
+<nav>
+
+<div class="logo">Pallu ✨</div>
+
+<ul>
+<li><a href="#gallery">Gallery</a></li>
+<li><a href="#moments">Moments</a></li>
+<li><a href="#letter">Letter</a></li>
+</ul>
+
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+
+<div class="hero-content">
+
+<div class="tag">
+🎂 A Beautiful Day For Someone Special
+</div>
+
+<h1>
+Happy Birthday <span>Pallu</span>
+</h1>
+
+<p>
+To the girl who makes life brighter, softer, and infinitely more beautiful —  
+this little world was created just to celebrate your smile, your existence, and every magical memory connected to you ✨
+</p>
+
+<div class="hero-btns">
+
+<a href="#gallery" class="btn primary">
+View Memories 💖
+</a>
+
+<a href="#letter" class="btn secondary">
+Read Letter ✨
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- Gallery -->
+<section id="gallery" class="fade-up">
+
+<div class="section-title">
+<h2>Beautiful Memories 📸</h2>
+<p>Replace these images with your favorite photos together</p>
+</div>
+
+<div class="gallery">
+
+<div class="card">
+<img src="photo1.jpg">
+<div class="overlay">
+<h3>Your Smile ✨</h3>
+<p>The prettiest thing in my universe.</p>
+</div>
+</div>
+
+<div class="card">
+<img src="photo2.jpg">
+<div class="overlay">
+<h3>Special Moments 💕</h3>
+<p>Every memory with you feels magical.</p>
+</div>
+</div>
+
+<div class="card">
+<img src="photo3.jpg">
+<div class="overlay">
+<h3>Pure Happiness 🌸</h3>
+<p>You make everything beautiful.</p>
+</div>
+</div>
+
+<div class="card">
+<img src="photo4.jpg">
+<div class="overlay">
+<h3>Golden Memories ✨</h3>
+<p>The moments I never want to lose.</p>
+</div>
+</div>
+
+<div class="card">
+<img src="photo5.jpg">
+<div class="overlay">
+<h3>Forever Favorite 💖</h3>
+<p>My heart always chooses you.</p>
+</div>
+</div>
+
+<div class="card">
+<img src="photo6.jpg">
+<div class="overlay">
+<h3>My Universe 🌙</h3>
+<p>You are my favorite feeling.</p>
+</div>
+</div>
+
+</div>
+
+</section>
+
+<!-- Timeline -->
+<section id="moments" class="fade-up">
+
+<div class="section-title">
+<h2>Moments With You ⏳</h2>
+<p>The little memories that became everything</p>
+</div>
+
+<div class="timeline">
+
+<div class="moment">
+<h3>✨ The First Conversation</h3>
+<p>
+The beginning of something unexpectedly beautiful.
+</p>
+</div>
+
+<div class="moment">
+<h3>🌸 The First Smile</h3>
+<p>
+A smile that stayed in my heart forever.
+</p>
+</div>
+
+<div class="moment">
+<h3>💖 Endless Memories</h3>
+<p>
+Every small moment with you became unforgettable.
+</p>
+</div>
+
+<div class="moment">
+<h3>🎂 Your Birthday</h3>
+<p>
+A day the universe gifted the world someone truly magical.
+</p>
+</div>
+
+</div>
+
+</section>
+
+<!-- Letter -->
+<section id="letter" class="letter fade-up">
+
+<div class="letter-box">
+
+<h2>For My Pallu 💌</h2>
+
+<p>
+Happy Birthday to the most beautiful soul I know 🌸  
+You deserve every happiness, every smile, and every beautiful thing life has to offer ✨
+<br><br>
+Thank you for being such a warm, comforting, and magical part of my life.  
+Your existence alone makes ordinary days feel special 💖
+<br><br>
+I hope your heart always stays happy, your dreams keep shining brighter,  
+and your smile never fades away 🌙
+<br><br>
+No matter how much time passes,  
+you will always remain one of the most precious parts of my life ✨
+<br><br>
+Happy Birthday once again, Pallu 🎂💖
+</p>
+
+</div>
+
+</section>
+
+<!-- Final -->
+<section class="final fade-up">
+
+<h1>I Love You ✨</h1>
+
+<p>
+And I’ll keep loving you in every universe, every timeline, and every little moment in between 💖
+</p>
+
+</section>
+
+<!-- Footer -->
+<footer>
+Made with endless love for Pallu 💕
+</footer>
+
+<!-- Music -->
+<audio autoplay loop>
+<source src="music.mp3" type="audio/mp3">
 </audio>
 
-<!-- 🎬 INTRO -->
-<div class="center page active" id="intro">
-    <h2 class="float">mwaahhhhhhhhhh . ye apke liye meri sadiya 💖</h2>
-    <button onclick="start()">Tap to Begin ✨</button>
-</div>
-
-<!-- 🔐 LOCK -->
-<div class="center page" id="lock">
-    <h2>Enter Password 💕</h2>
-    <input type="password" id="password" placeholder="hint (apko pata hai heheeee)">
-    <br>
-    <button onclick="check()">Unlock 💫</button>
-</div>
-
-<!-- 💌 PAGE 1 -->
-<div class="center page" id="p1">
-    <div class="typing float" id="t1"></div>
-    <button onclick="next(2)">Next ➡️</button>
-</div>
-
-<!-- 💌 PAGE 2 -->
-<div class="center page" id="p2">
-    <div class="typing float" id="t2"></div>
-    <button onclick="next(3)">Next ➡️</button>
-</div>
-
-<!-- 💌 PAGE 3 -->
-<div class="center page" id="p3">
-    <div class="typing float" id="t3"></div>
-    <button onclick="next(4)">Next ➡️</button>
-</div>
-
-<!-- 💖 FINAL -->
-<div class="center page" id="p4">
-    <div class="typing float" id="t4"></div>
-    <img src="bg.jpg" class="final-img">
-</div>
-
 <script>
-// 🌟 Stars
-for(let i=0;i<120;i++){
-    let s=document.createElement("div");
-    s.className="star";
-    s.style.top=Math.random()*window.innerHeight+"px";
-    s.style.left=Math.random()*window.innerWidth+"px";
-    s.style.animationDuration=(Math.random()*2+1)+"s";
-    document.body.appendChild(s);
+
+/* ========================= */
+/* Generate Stars */
+/* ========================= */
+
+const starsContainer = document.getElementById('stars');
+
+for(let i=0;i<250;i++){
+
+const star = document.createElement('div');
+
+star.classList.add('star');
+
+star.style.top = Math.random()*100 + '%';
+star.style.left = Math.random()*100 + '%';
+
+star.style.animationDuration = (Math.random()*3 + 2) + 's';
+
+starsContainer.appendChild(star);
+
 }
 
-// 💖 Floating hearts
-setInterval(()=>{
-    let h=document.createElement("div");
-    h.className="heart";
-    h.innerHTML="💖";
-    h.style.left=Math.random()*100+"%";
-    document.body.appendChild(h);
-    setTimeout(()=>h.remove(),6000);
-},400);
+/* ========================= */
+/* Fade Animation */
+/* ========================= */
 
-// 💥 Click hearts burst
-document.addEventListener("click", e=>{
-    for(let i=0;i<6;i++){
-        let h=document.createElement("div");
-        h.className="heart";
-        h.innerHTML="💖";
-        h.style.left=e.clientX+"px";
-        h.style.top=e.clientY+"px";
-        document.body.appendChild(h);
-        setTimeout(()=>h.remove(),2000);
-    }
+const fadeElements = document.querySelectorAll('.fade-up');
+
+window.addEventListener('scroll', ()=>{
+
+fadeElements.forEach(el=>{
+
+const rect = el.getBoundingClientRect();
+
+if(rect.top < window.innerHeight - 100){
+el.classList.add('show');
+}
+
 });
 
-// 🎧 Start
-function start(){
-    show("lock");
-    let music=document.getElementById("music");
-    music.volume=0.7;
-    music.play().catch(()=>{});
-}
+});
 
-// 🔒 Password
-function check(){
-    let p=document.getElementById("password").value;
-    if(p.toLowerCase()=="sadiya"){
-        show("p1");
-        type("t1","Meri jaaaaannnnn 🥺💖 I looooovvvveeeee youuuuuuuuu 💞");
-    }else{
-        alert("Wrong password 😝");
-    }
-}
+/* ========================= */
+/* Cursor Glow */
+/* ========================= */
 
-// 🔄 Page switch
-function show(id){
-    document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
-    document.getElementById(id).classList.add("active");
-}
+const glow = document.querySelector('.cursor-glow');
 
-function next(n){
-    show("p"+n);
+document.addEventListener('mousemove',(e)=>{
 
-    if(n==2) type("t2",`I love you 💖
-I love you 🥺💕
-I love you so much 😭❤️
-I love you more than everything 🌍💗
-I love you forever 💍❤️
+glow.style.left = e.clientX + 'px';
+glow.style.top = e.clientY + 'px';
 
-I love you 💖 I love you 💖 I love you 💖
-I love you 🥰 I love you 🥰 I love you 🥰
-I love you 💖
-I love you 🥺💕
-I love youuu 💞
-I love you so much 😭❤️
-I love you more than everything 🌍💗
-I love you infinity ♾️💘
-I love you endlessly 🫶💓
-I love you to the moon and back 🌙🚀💖
-I love you forever and always 💍❤️
-I love youuuuuuu 😚💞
+});
 
-I love you 💖 I love you 💖 I love you 💖
-I love you 🥰 I love you 🥰 I love you 🥰
-I love you ❤️ I love you ❤️ I love you ❤️
-I love you 💕 I love you 💕 I love you 💕
-I love you 😘 I love you 😘 I love you 😘
+/* ========================= */
+/* Music Autoplay Fix */
+/* ========================= */
 
-I love you more than words can ever say 🥹💗
-I love you more every single day 🌸❤️
-I love you more than yesterday but less than tomorrow 💞✨
+const audio = document.querySelector("audio");
 
-I love you 💖💖💖
-I love you 💖💖💖
-I love you 💖💖💖
+document.addEventListener("click", () => {
+audio.play();
+}, { once:true });
 
-I love youuuuuuuuuuuuuuu 😭💘
-I love youuuuuuuuuuuuuuu 😭💘
-I love youuuuuuuuuuuuuuu 😭💘
-
-I love you 💕 I love you 💕 I love you 💕
-I love you 💓 I love you 💓 I love you 💓
-I love you 💘 I love you 💘 I love you 💘
-
-I love you more than stars in the sky ✨💖
-I love you more than waves in the ocean 🌊❤️
-I love you more than anything and everything 🫶💞
-
-I love you 💖
-I love you 💖 💞
-
-
-I love you more every single day 🌸❤️
-I love you infinity ♾️💘`);
-
-    if(n==3) type("t3",`Baby 🥺💖 Babe 💕 Sweetheart 💓 My Love 💘 Princess 👑 Angel 😇 Honey 🍯 Cutie 💞 Darling 💗
-
-My World 🌍💖 My Everything 💞 Sunshine ☀️💕 Moonlight 🌙💗 My Heart ❤️ Soulmate 💫💘 Lovebug 🐞💓 Snugglebug 🤗💖 My Queen 👑💞
-
-Goofball 😝💖 Drama Queen 🎭💕 Giggles 😄💓 Choco Pie 🍫💗 Jellybean 🍬💞 Miss Cute 😚💘 Tiny Trouble 😈💖 Monkey 🐒💓
-
-Cupcake 🧁💕 Muffin 🧁💗 Sugarplum 🍭💞 Peaches 🍑💖 Honeybun 🍯💓 Lollipop 🍭💘 Strawberry 🍓💗 Cookie 🍪💖
-
-Starlight ✨💖 Butterfly 🦋💕 Dollface 🥺💗 Dreamgirl 💭💘 My Melody 🎶💞 Snowflake ❄️💖 Rosie 🌹💓 Bambi 🦌💗
-
-My Baby Forever 💖 My Pretty Girl 🥺💕 My Cuddle Buddy 🤗💓 My Safe Place 💞 My Happy Place 😊💘 My Heartbeat ❤️‍🔥 My Sweet Addiction 💗
-
-Jaan ❤️ Jaanu 💕 Shona 🥺💗 Babu 💞 Gudiya 🪆💖 Meri Rani 👑💓 Cutie Patootie 😚💘
-`);
-
-    if(n==4) type("t4",`I’m all yours… forever 💖
-Forever… and always ❤️`);
-}
-
-// ⌨ Typing effect
-function type(id,text){
-    let i=0;
-    let el=document.getElementById(id);
-    el.innerHTML="";
-
-    function t(){
-        if(i<text.length){
-            el.innerHTML+=text.charAt(i);
-            i++;
-            setTimeout(t,40);
-        }
-    }
-    t();
-}
 </script>
 
 </body>
